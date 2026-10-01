@@ -1,14 +1,10 @@
-/*
-Purpose:
-  Creates the core SQL Server database and baseline settings for the
-  Hotel Management Database project.
-
-Implementation Notes:
-  - Define database filegroups and growth strategy.
-  - Configure recovery model based on backup requirements.
-  - Set collation and compatibility level.
-*/
-
--- Placeholder script
 -- CREATE DATABASE [HotelManagementDatabase];
+-----------------------------------------------------------
+-------------CREACIÓN BASE DE DATOS HOTEL------------------
+-----------------------------------------------------------
+
+CREATE DATABASE bd_hotel_grupoAA;
+GO
+
+USE bd_hotel_grupoAA;
 GO
