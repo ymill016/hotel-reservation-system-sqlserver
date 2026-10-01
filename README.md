@@ -81,8 +81,5 @@ hotel-reservation-system-sqlserver/
 - Expand auditing, role-based access, and compliance controls.
 - Publish Power BI dashboards connected to the finalized schema.
 
-## Author
-**Yamil Millán**
-
----
-This repository is structured as a professional database engineering portfolio project.
+## Authors
+**Yamileth Menjívar**
