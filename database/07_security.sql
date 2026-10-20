@@ -1,7 +1,6 @@
 /* ============================================================
-   SEGURIDAD
-   bd_hotel_grupoAA
-============================================================ */
+   SEGURIDAD - bd_hotel_grupoAC
+   ============================================================ */
 
 USE master;
 GO
@@ -30,7 +29,7 @@ CREATE ROLE rol_gerente;
 GO
 
 /* ============================================================
-   USUARIOS
+   USUARIOS  (uno por integrante del equipo)
 ============================================================ */
 
 CREATE USER krissia_menjivar
@@ -50,7 +49,7 @@ WITH PASSWORD = 'Melissa123$';
 GO
 
 /* ============================================================
-   ADMINISTRADOR
+   ADMINISTRADOR: control total
 ============================================================ */
 
 GRANT CONTROL
@@ -82,6 +81,11 @@ GRANT SELECT
 ON dbo.hotel
 TO rol_recepcionista;
 
+-- Vista operativa de estancias activas (recepcion)
+GRANT SELECT
+ON dbo.vw_estancias_activas
+TO rol_recepcionista;
+
 /* PROCEDIMIENTOS */
 
 GRANT EXECUTE
@@ -94,6 +98,18 @@ GRANT EXECUTE
 ON dbo.fn_habitacion_disponible
 TO rol_recepcionista;
 
+GO
+
+-- DEFENSA EN PROFUNDIDAD: el recepcionista NO toca facturas
+-- (aunque por error alguien le diera permisos en otro objeto,
+-- este DENY bloquea el acceso a las tablas financieras)
+DENY SELECT, INSERT, UPDATE, DELETE
+ON dbo.factura
+TO rol_recepcionista;
+
+DENY SELECT, INSERT, UPDATE, DELETE
+ON dbo.detalle_factura
+TO rol_recepcionista;
 GO
 
 /* ============================================================
@@ -143,7 +159,8 @@ TO rol_cajero;
 GO
 
 /* ============================================================
-   GERENTE
+   GERENTE: solo lectura de TODO + vistas analiticas
+   (es el usuario ideal para conectar Power BI)
 ============================================================ */
 
 GRANT SELECT
@@ -186,10 +203,31 @@ GRANT SELECT
 ON dbo.consumo_servicio
 TO rol_gerente;
 
+-- Vistas analiticas (alimentan el dashboard de Power BI)
+GRANT SELECT
+ON dbo.vw_ocupacion_por_hotel
+TO rol_gerente;
+
+GRANT SELECT
+ON dbo.vw_ingresos_mensuales
+TO rol_gerente;
+
+GRANT SELECT
+ON dbo.vw_servicios_mas_consumidos
+TO rol_gerente;
+
+GRANT SELECT
+ON dbo.vw_resumen_facturacion
+TO rol_gerente;
+
+GRANT SELECT
+ON dbo.vw_canales_reserva
+TO rol_gerente;
+
 GO
 
 /* ============================================================
-   ASIGNACION DE ROLES
+   ASIGNACION DE ROLES  (CORREGIDO: joahha_menjivar)
 ============================================================ */
 
 ALTER ROLE rol_administrador
@@ -197,7 +235,7 @@ ADD MEMBER krissia_menjivar;
 GO
 
 ALTER ROLE rol_recepcionista
-ADD MEMBER joahha_recinos;
+ADD MEMBER joahha_menjivar;
 GO
 
 ALTER ROLE rol_cajero
@@ -209,21 +247,33 @@ ADD MEMBER melissa_castro;
 GO
 
 /* ============================================================
-   PRUEBAS
+   PRUEBAS (evidencia para el informe)
+   Cada bloque muestra que el permiso funciona como se espera
 ============================================================ */
 
+-- Prueba 1: recepcionista SI puede ver huespedes
 EXECUTE AS USER = 'joahha_menjivar';
-
 SELECT TOP 5 *
 FROM huesped;
-
 REVERT;
 GO
 
-EXECUTE AS USER = 'kevin_alas';
+-- Prueba 2: recepcionista NO puede ver facturas (debe dar error de permiso)
+EXECUTE AS USER = 'joahha_menjivar';
+SELECT TOP 5 *
+FROM factura;      -- Esperado: "The SELECT permission was denied"
+REVERT;
+GO
 
+-- Prueba 3: cajero SI puede ver facturas
+EXECUTE AS USER = 'kevin_alas';
 SELECT TOP 5 *
 FROM factura;
+REVERT;
+GO
 
+-- Prueba 4: gerente puede ver la vista analitica
+EXECUTE AS USER = 'melissa_castro';
+SELECT * FROM vw_ingresos_mensuales;
 REVERT;
 GO
