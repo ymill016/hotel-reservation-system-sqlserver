@@ -19,7 +19,7 @@ ALTER DATABASE bd_hotel_grupoAA SET CONTAINMENT = PARTIAL;
 GO
 
 -- Crear usuarios con contraseña dentro de la base de datos
-USE bd_hotel_grupoAA;
+USE bd_hotel_grupoAC;
 GO
 
 CREATE USER carlos WITH PASSWORD = '1234!';
