@@ -10,7 +10,7 @@ GO
 --------------------------------------------------------------- */
 WITH ingreso_servicio AS (
 SELECT s.id_servicio,s.nombre,s.categoria,
-SUM(cs.subtotal) AS ingreso FROM consumo_servicio cs
+SUM(cs.subtotal) AS ingreso FROM operaciones.consumo_servicios
 JOIN servicio s ON s.id_servicio = cs.id_servicio
 GROUP BY s.id_servicio, s.nombre, s.categoria),
 
