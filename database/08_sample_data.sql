@@ -1,6 +1,8 @@
 /* ============================================================
    DATOS DE PRUEBA - bd_hotel_grupoAA
    Uso: ejecutar DESPUES de 02_tables.sql, 04, 05, 06
+   Contenido: 110 huespedes (10 base + 100 adicionales)
+              111 reservaciones (11 base + 100 adicionales)
    ============================================================ */
 USE bd_hotel_grupoAA;
 GO
@@ -47,6 +49,7 @@ GO
 
 /* ------------------------------------------------------------
    4. HUESPEDES
+   4.1 Huespedes base (1-10): usados por estancias/acompanantes
 ------------------------------------------------------------ */
 SET IDENTITY_INSERT huesped ON;
 INSERT INTO huesped (id_huesped, nombre, apellido, documento_identidad, telefono, correo, direccion, tipo_documento, nacionalidad, fecha_registro) VALUES
@@ -61,6 +64,112 @@ INSERT INTO huesped (id_huesped, nombre, apellido, documento_identidad, telefono
 (9, 'Elena',    'Castillo',   '00778899-0', '7777-0009', 'elena.castillo@gmail.com',   'Santa Ana, Santa Ana',         'DUI',             'El Salvador',  '2025-04-01'),
 (10,'David',    'Ortiz',      'P9988776',   '7777-0010', 'david.ortiz@gmail.com',      'Toronto, Canadá',              'PASAPORTE',       'Canadá',       '2025-04-10');
 SET IDENTITY_INSERT huesped OFF;
+GO
+
+/* ------------------------------------------------------------
+   4.2 Huespedes adicionales (100 registros -> ids 11 a 110)
+------------------------------------------------------------ */
+INSERT INTO huesped (nombre, apellido, documento_identidad, telefono, correo, direccion, tipo_documento, nacionalidad, fecha_registro) VALUES
+('Carlos', 'Rubio', '01234567-1', '7123-4567', 'carlos.rubio@gmail.com', 'Col. Escalon, San Salvador', 'DUI', 'El Salvador', '2026-01-10'),
+('Sofia', 'Menjivar', '02345678-2', '7234-5678', 'sofia.menjivar@outlook.com', 'Santa Ana Centro', 'DUI', 'El Salvador', '2026-01-12'),
+('Mateo', 'Gomez', 'P98765431', '502-5555-0101', 'mateo.gomez@hotmail.com', 'Zona 10, Ciudad de Guatemala', 'PASAPORTE', 'Guatemala', '2026-01-15'),
+('Valeria', 'Lopez', 'P87654322', '504-9999-0202', 'vlopez@yahoo.com', 'Col. Palmira, Tegucigalpa', 'PASAPORTE', 'Honduras', '2026-01-18'),
+('Diego', 'Hernandez', 'P76543213', '506-8888-0303', 'dhernandez@gmail.com', 'San Jose Centro', 'PASAPORTE', 'Costa Rica', '2026-01-20'),
+('Camila', 'Martinez', 'P65432104', '52-55-1234-5678', 'camila.martinez@gmail.com', 'Polanco, CDMX', 'PASAPORTE', 'Mexico', '2026-01-22'),
+('Lucas', 'Perez', 'P54321095', '1-305-555-0199', 'lucas.perez@aol.com', 'Brickell Ave, Miami', 'PASAPORTE', 'Estados Unidos', '2026-01-25'),
+('Mariana', 'Rodriguez', '03456789-3', '7345-6789', 'mariana.rodriguez@gmail.com', 'San Miguel Centro', 'DUI', 'El Salvador', '2026-01-28'),
+('Alejandro', 'Sanchez', 'P43210986', '34-91-555-0144', 'asanchez@hotmail.com', 'Gran Via, Madrid', 'PASAPORTE', 'Espana', '2026-02-01'),
+('Lucia', 'Ramirez', 'P32109877', '57-601-555-0188', 'lramirez@gmail.com', 'El Poblado, Medellin', 'PASAPORTE', 'Colombia', '2026-02-03'),
+('Fernando', 'Torres', '04567890-4', '7456-7890', 'ftorres@gmail.com', 'Antiguo Cuscatlan', 'DUI', 'El Salvador', '2026-02-05'),
+('Gabriela', 'Morales', '05678901-5', '7567-8901', 'gabi.morales@outlook.com', 'Santa Tecla', 'DUI', 'El Salvador', '2026-02-08'),
+('Adrian', 'Castillo', 'P21098768', '502-5555-0202', 'acastillo@gmail.com', 'Quetzaltenango', 'PASAPORTE', 'Guatemala', '2026-02-10'),
+('Daniela', 'Flores', '06789012-6', '7678-9012', 'daniela.flores@yahoo.com', 'Sonsonate Centro', 'DUI', 'El Salvador', '2026-02-12'),
+('Javier', 'Navarro', 'P10987659', '52-81-1234-8899', 'jnavarro@gmail.com', 'Monterrey, NL', 'PASAPORTE', 'Mexico', '2026-02-15'),
+('Paula', 'Mendoza', '07890123-7', '7789-0123', 'pmendoza@gmail.com', 'Col. San Benito, San Salvador', 'DUI', 'El Salvador', '2026-02-18'),
+('Hugo', 'Aguilar', 'P09876540', '504-8888-0404', 'hugo.aguilar@outlook.com', 'San Pedro Sula', 'PASAPORTE', 'Honduras', '2026-02-20'),
+('Natalia', 'Rios', '08901234-8', '7890-1234', 'nrios@gmail.com', 'Ahuachapan Centro', 'DUI', 'El Salvador', '2026-02-22'),
+('Emanuel', 'Reyes', 'P90123456', '506-7777-0505', 'ereyes@gmail.com', 'Heredia', 'PASAPORTE', 'Costa Rica', '2026-02-25'),
+('Andrea', 'Vargas', '09012345-9', '7901-2345', 'andrea.vargas@yahoo.com', 'Cojutepeque', 'DUI', 'El Salvador', '2026-02-28'),
+('Sonia', 'Alvarado', '10123456-0', '7012-3456', 'sonia.alvarado@gmail.com', 'Usulutan Centro', 'DUI', 'El Salvador', '2026-03-01'),
+('Rodrigo', 'Pineda', '11234567-1', '7123-9988', 'rpineda@gmail.com', 'La Libertad Centro', 'DUI', 'El Salvador', '2026-03-02'),
+('Claudia', 'Fuentes', 'P81234567', '502-4444-0303', 'cfuentes@hotmail.com', 'Antigua Guatemala', 'PASAPORTE', 'Guatemala', '2026-03-04'),
+('Gonzalo', 'Miranda', '12345678-2', '7234-8877', 'gmiranda@outlook.com', 'Chalatenango Centro', 'DUI', 'El Salvador', '2026-03-05'),
+('Irene', 'Carrillo', '13456789-3', '7345-7766', 'icarrillo@gmail.com', 'San Vicente Centro', 'DUI', 'El Salvador', '2026-03-07'),
+('Esteban', 'Solis', 'P71234568', '506-6666-0606', 'esolis@yahoo.com', 'Alajuela', 'PASAPORTE', 'Costa Rica', '2026-03-08'),
+('Monica', 'Lara', '14567890-4', '7456-6655', 'mlara@gmail.com', 'Zacatecoluca', 'DUI', 'El Salvador', '2026-03-10'),
+('Samuel', 'Campos', '15678901-5', '7567-5544', 'scampos@gmail.com', 'Col. Flor Blanca, San Salvador', 'DUI', 'El Salvador', '2026-03-11'),
+('Renata', 'Mejia', 'P61234569', '52-33-9988-7766', 'rmejia@outlook.com', 'Guadalajara, Jalisco', 'PASAPORTE', 'Mexico', '2026-03-13'),
+('Victor', 'Cabrera', '16789012-6', '7678-4433', 'vcabrera@gmail.com', 'Merliot, La Libertad', 'DUI', 'El Salvador', '2026-03-14'),
+('Alicia', 'Salazar', '17890123-7', '7789-3322', 'asalazar@yahoo.com', 'Metapan', 'DUI', 'El Salvador', '2026-03-16'),
+('Guillermo', 'Pena', 'P51234570', '504-7777-0808', 'gpena@gmail.com', 'La Ceiba', 'PASAPORTE', 'Honduras', '2026-03-17'),
+('Isabel', 'Franco', '18901234-8', '7890-2211', 'ifranco@gmail.com', 'Soyapango Centro', 'DUI', 'El Salvador', '2026-03-19'),
+('Manuel', 'Cardenas', '19012345-9', '7901-1100', 'mcardenas@hotmail.com', 'Ilopango', 'DUI', 'El Salvador', '2026-03-20'),
+('Veronica', 'Espinosa', 'P41234571', '57-604-444-0101', 'vespinosa@gmail.com', 'Bogota DC', 'PASAPORTE', 'Colombia', '2026-03-22'),
+('Oscar', 'Roldan', '20123456-0', '7012-0099', 'oroldan@gmail.com', 'Apopa Centro', 'DUI', 'El Salvador', '2026-03-23'),
+('Beatriz', 'Arias', '21234567-1', '7123-8811', 'barias@outlook.com', 'Meicanos', 'DUI', 'El Salvador', '2026-03-25'),
+('Cesar', 'Mora', 'P31234572', '506-8888-0909', 'cmora@gmail.com', 'Cartago', 'PASAPORTE', 'Costa Rica', '2026-03-26'),
+('Diana', 'Guerrero', '22345678-2', '7234-7722', 'dguerrero@yahoo.com', 'Col. Escalon Norte', 'DUI', 'El Salvador', '2026-03-28'),
+('Emilio', 'Nunez', '23456789-3', '7345-6633', 'enunez@gmail.com', 'San Martin', 'DUI', 'El Salvador', '2026-03-29'),
+('Fabiola', 'Paredes', 'P21234573', '502-3333-0909', 'fparedes@gmail.com', 'Escuintla', 'PASAPORTE', 'Guatemala', '2026-03-31'),
+('Gabriel', 'Serrano', '24567890-4', '7456-5544', 'gserrano@hotmail.com', 'Delgado Centro', 'DUI', 'El Salvador', '2026-04-01'),
+('Helena', 'Ochoa', '25678901-5', '7567-4455', 'hochoa@gmail.com', 'Cuscatancingo', 'DUI', 'El Salvador', '2026-04-03'),
+('Ignacio', 'Tapia', 'P11234574', '52-55-9900-1122', 'itapia@gmail.com', 'Puebla Centro', 'PASAPORTE', 'Mexico', '2026-04-04'),
+('Juliana', 'Valdez', '26789012-6', '7678-3366', 'jvaldez@outlook.com', 'San Marcos Centro', 'DUI', 'El Salvador', '2026-04-06'),
+('Kevin', 'Alas', '27890123-7', '7789-2277', 'kalas@gmail.com', 'Lourdes Colon', 'DUI', 'El Salvador', '2026-04-07'),
+('Lorena', 'Zelaya', '28901234-8', '7890-1188', 'lzelaya@yahoo.com', 'Ciudad Arce', 'DUI', 'El Salvador', '2026-04-09'),
+('Mauricio', 'Brescia', 'P01234575', '39-06-555-0199', 'mbrescia@gmail.com', 'Roma Centro', 'PASAPORTE', 'Italia', '2026-04-10'),
+('Nuria', 'Gallegos', '29012345-9', '7901-0099', 'ngallegos@gmail.com', 'Opico Centro', 'DUI', 'El Salvador', '2026-04-12'),
+('Orlando', 'Corta', '30123456-0', '7012-9900', 'ocorta@gmail.com', 'Quezaltepeque', 'DUI', 'El Salvador', '2026-04-13'),
+('Patricia', 'Quinteros', '31234567-1', '7123-8800', 'pquinteros@outlook.com', 'Aguilares', 'DUI', 'El Salvador', '2026-04-15'),
+('Quirino', 'Bautista', 'P98761234', '502-7777-0101', 'qbautista@gmail.com', 'Chimaltenango', 'PASAPORTE', 'Guatemala', '2026-04-16'),
+('Rosario', 'Santana', '32345678-2', '7234-6600', 'rsantana@yahoo.com', 'Guazapa', 'DUI', 'El Salvador', '2026-04-18'),
+('Sebastian', 'Vidal', '33456789-3', '7345-5500', 'svidal@gmail.com', 'Nejapa', 'DUI', 'El Salvador', '2026-04-19'),
+('Tania', 'Cisneros', '34567890-4', '7456-4400', 'tcisneros@gmail.com', 'Tonacatepeque', 'DUI', 'El Salvador', '2026-04-21'),
+('Uriel', 'Pacheco', 'P88761235', '504-3333-0202', 'apacheco@hotmail.com', 'Choluteca', 'PASAPORTE', 'Honduras', '2026-04-22'),
+('Vanessa', 'Guzman', '35678901-5', '7567-3300', 'vguzman@gmail.com', 'Panchimalco', 'DUI', 'El Salvador', '2026-04-24'),
+('Walter', 'Portillo', '36789012-6', '7678-2200', 'wportillo@outlook.com', 'Santo Tomas', 'DUI', 'El Salvador', '2026-04-25'),
+('Ximena', 'Ibarra', 'P78761236', '52-81-8877-6655', 'xibarra@gmail.com', 'Queretaro', 'PASAPORTE', 'Mexico', '2026-04-27'),
+('Yolanda', 'Sola', '37890123-7', '7789-1100', 'ysola@yahoo.com', 'Santiago Texacuangos', 'DUI', 'El Salvador', '2026-04-28'),
+('Zacarias', 'Benitez', '38901234-8', '7890-0011', 'zbenitez@gmail.com', 'Rosario de Mora', 'DUI', 'El Salvador', '2026-04-30'),
+('Alvaro', 'Montes', '39012345-9', '7901-9922', 'amontes@gmail.com', 'Zaragoza', 'DUI', 'El Salvador', '2026-05-02'),
+('Bianca', 'Sosa', 'P68761237', '506-2222-0303', 'bsosa@outlook.com', 'Puntarenas', 'PASAPORTE', 'Costa Rica', '2026-05-03'),
+('Camilo', 'Duarte', '40123456-0', '7012-8833', 'cduarte@gmail.com', 'San Jose Villanueva', 'DUI', 'El Salvador', '2026-05-05'),
+('Delia', 'Nieto', '41234567-1', '7123-7744', 'dnieto@yahoo.com', 'Huizucar', 'DUI', 'El Salvador', '2026-05-06'),
+('Edgar', 'Coronado', 'P58761238', '502-6666-0404', 'ecoronado@gmail.com', 'Coban', 'PASAPORTE', 'Guatemala', '2026-05-08'),
+('Flavia', 'Olivares', '42345678-2', '7234-6655', 'folivares@gmail.com', 'Nuevo Cuscatlan', 'DUI', 'El Salvador', '2026-05-09'),
+('Gustavo', 'Barrios', '43456789-3', '7345-5566', 'gbarrios@hotmail.com', 'Col. Utila, Santa Tecla', 'DUI', 'El Salvador', '2026-05-11'),
+('Hilda', 'Tellez', '44567890-4', '7456-4477', 'htellez@gmail.com', 'San Juan Opico', 'DUI', 'El Salvador', '2026-05-12'),
+('Ismael', 'Palacios', 'P48761239', '504-2222-0505', 'ipalacios@outlook.com', 'Comayagua', 'PASAPORTE', 'Honduras', '2026-05-14'),
+('Jacqueline', 'Mora', '45678901-5', '7567-3388', 'jmora@gmail.com', 'Ciudad Merliot', 'DUI', 'El Salvador', '2026-05-15'),
+('Leonel', 'Samayoa', '46789012-6', '7678-2299', 'lsamayoa@yahoo.com', 'Santa Rosa de Lima', 'DUI', 'El Salvador', '2026-05-17'),
+('Miriam', 'Villegas', 'P38761240', '52-55-4433-2211', 'mvillegas@gmail.com', 'Veracruz', 'PASAPORTE', 'Mexico', '2026-05-18'),
+('Nelson', 'Orellana', '47890123-7', '7789-1100', 'norellana@gmail.com', 'Chalchuapa', 'DUI', 'El Salvador', '2026-05-20'),
+('Olga', 'Escobar', '48901234-8', '7890-0011', 'oescobar@hotmail.com', 'Atiquizaya', 'DUI', 'El Salvador', '2026-05-21'),
+('Pablo', 'Cornejo', '49012345-9', '7901-9922', 'pcornejo@gmail.com', 'Jujutla', 'DUI', 'El Salvador', '2026-05-23'),
+('Raquel', 'Rivas', 'P28761241', '502-8888-0505', 'rrivas@outlook.com', 'Huehuetenango', 'PASAPORTE', 'Guatemala', '2026-05-24'),
+('Saul', 'Chavez', '50123456-0', '7012-8833', 'schavez@gmail.com', 'Sonsonate Centro', 'DUI', 'El Salvador', '2026-05-26'),
+('Teresa', 'Galdamez', '51234567-1', '7123-7744', 'tgaldamez@yahoo.com', 'Izalco', 'DUI', 'El Salvador', '2026-05-27'),
+('Ulises', 'Melendez', '52345678-2', '7234-6655', 'umelendez@gmail.com', 'Nahuizalco', 'DUI', 'El Salvador', '2026-05-29'),
+('Vilma', 'Funes', '53456789-3', '7345-5566', 'vfunes@gmail.com', 'Acajutla', 'DUI', 'El Salvador', '2026-05-30'),
+('Wilfredo', 'Ceron', '54567890-4', '7456-4477', 'wceron@hotmail.com', 'Armenia', 'DUI', 'El Salvador', '2026-06-01'),
+('Xiomara', 'Lazo', 'P18761242', '504-9999-0606', 'xlazo@gmail.com', 'Copan Ruinas', 'PASAPORTE', 'Honduras', '2026-06-02'),
+('Yamil', 'Bukele', '55678901-5', '7567-3388', 'ybukele@gmail.com', 'Col. Escalon, San Salvador', 'DUI', 'El Salvador', '2026-06-04'),
+('Zulma', 'Aparicio', '56789012-6', '7678-2299', 'zaparicio@outlook.com', 'Berlin, Usulutan', 'DUI', 'El Salvador', '2026-06-05'),
+('Armando', 'Paz', '57890123-7', '7789-1100', 'apaz@gmail.com', 'Santiago de Maria', 'DUI', 'El Salvador', '2026-06-07'),
+('Brenda', 'Molina', '58901234-8', '7890-0011', 'bmolina@yahoo.com', 'Jiquilisco', 'DUI', 'El Salvador', '2026-06-08'),
+('Cristian', 'Lemus', 'P08761243', '506-3333-0707', 'clemus@gmail.com', 'Liberia, Guanacaste', 'PASAPORTE', 'Costa Rica', '2026-06-10'),
+('Dora', 'Recinos', '59012345-9', '7901-9922', 'drecinos@gmail.com', 'Ilobasco', 'DUI', 'El Salvador', '2026-06-11'),
+('Efrain', 'Beltran', '60123456-0', '7012-8833', 'ebeltran@hotmail.com', 'Sensuntepeque', 'DUI', 'El Salvador', '2026-06-13'),
+('Gisela', 'Soriano', '61234567-1', '7123-7744', 'gsoriano@gmail.com', 'San Rafael Cedros', 'DUI', 'El Salvador', '2026-06-14'),
+('Hector', 'Castaneda', 'P97651244', '52-33-1122-3344', 'hcastaneda@outlook.com', 'Tijuana, BC', 'PASAPORTE', 'Mexico', '2026-06-16'),
+('Ines', 'Osorio', '62345678-2', '7234-6655', 'iosorio@gmail.com', 'San Pedro Perulapan', 'DUI', 'El Salvador', '2026-06-17'),
+('Jorge', 'Ayala', '63456789-3', '7345-5566', 'jayala@yahoo.com', 'Suchitoto', 'DUI', 'El Salvador', '2026-06-19'),
+('Kenia', 'Guitron', '64567890-4', '7456-4477', 'kguitron@gmail.com', 'Tenancingo', 'DUI', 'El Salvador', '2026-06-20'),
+('Lazaro', 'Calderon', 'P87651245', '502-2222-0808', 'lcalderon@gmail.com', 'Mazatenango', 'PASAPORTE', 'Guatemala', '2026-06-22'),
+('Marta', 'Ventura', '65678901-5', '7567-3388', 'mventura@hotmail.com', 'Gotera, Morazan', 'DUI', 'El Salvador', '2026-06-23'),
+('Noe', 'Barahona', '66789012-6', '7678-2299', 'nbarahona@gmail.com', 'Jocoro', 'DUI', 'El Salvador', '2026-06-25'),
+('Ofelia', 'Guzman', '67890123-7', '7789-1100', 'oguzman@outlook.com', 'La Union Centro', 'DUI', 'El Salvador', '2026-06-26'),
+('Pedro', 'Chacon', '68901234-8', '7890-0011', 'pchacon@gmail.com', 'Conchagua', 'DUI', 'El Salvador', '2026-06-28');
 GO
 
 /* ------------------------------------------------------------
@@ -103,6 +212,7 @@ GO
 
 /* ------------------------------------------------------------
    7. RESERVACIONES
+   7.1 Reservaciones base (1-11): usadas por estancias
 ------------------------------------------------------------ */
 SET IDENTITY_INSERT reservacion ON;
 INSERT INTO reservacion (id_reservacion, fecha_reserva, fecha_entrada, fecha_salida, estado_reserva, canal_reserva, id_huesped, id_empleado, id_tipo_habitacion) VALUES
@@ -118,6 +228,38 @@ INSERT INTO reservacion (id_reservacion, fecha_reserva, fecha_entrada, fecha_sal
 (10, '2025-07-01', '2025-08-01', '2025-08-05', 'CONFIRMADA', 'WEB',      10, 2, 3),
 (11, '2025-07-05', '2025-08-10', '2025-08-14', 'PENDIENTE',  'RECEPCION', 1, 1, 2);
 SET IDENTITY_INSERT reservacion OFF;
+GO
+
+/* ------------------------------------------------------------
+   7.2 Reservaciones adicionales (100 registros -> ids 12 a 111)
+   Una por cada huesped adicional (ids > 10). Las fechas se
+   calculan a partir de fecha_registro del huesped, asi la
+   reserva nunca es anterior a su registro y el script da
+   siempre el mismo resultado (no depende de GETDATE()).
+   Empleados usados: 1, 2 y 5 (recepcionistas activos).
+------------------------------------------------------------ */
+INSERT INTO reservacion (fecha_reserva, fecha_entrada, fecha_salida, estado_reserva, canal_reserva, id_huesped, id_empleado, id_tipo_habitacion)
+SELECT
+    DATEADD(DAY, 3 + (h.id_huesped % 7), h.fecha_registro)                                            AS fecha_reserva,
+    DATEADD(DAY, 20 + (h.id_huesped % 15), h.fecha_registro)                                          AS fecha_entrada,
+    DATEADD(DAY, 20 + (h.id_huesped % 15) + 2 + (h.id_huesped % 4), h.fecha_registro)                 AS fecha_salida,
+    CASE h.id_huesped % 3
+        WHEN 0 THEN 'CONFIRMADA'
+        WHEN 1 THEN 'PENDIENTE'
+        ELSE        'CANCELADA'
+    END                                                                                               AS estado_reserva,
+    CASE h.id_huesped % 4
+        WHEN 0 THEN 'WEB'
+        WHEN 1 THEN 'RECEPCION'
+        WHEN 2 THEN 'TELEFONO'
+        ELSE        'AGENCIA'
+    END                                                                                               AS canal_reserva,
+    h.id_huesped,
+    CHOOSE((h.id_huesped % 3) + 1, 1, 2, 5)                                                           AS id_empleado,
+    (h.id_huesped % 4) + 1                                                                            AS id_tipo_habitacion
+FROM huesped h
+WHERE h.id_huesped > 10
+ORDER BY h.id_huesped;
 GO
 
 /* ------------------------------------------------------------
@@ -249,6 +391,7 @@ GO
 
 /* ------------------------------------------------------------
    VERIFICACION RAPIDA
+   Esperado: huesped = 110, reservacion = 111
 ------------------------------------------------------------ */
 SELECT 'hotel' AS tabla, COUNT(*) AS filas FROM hotel
 UNION ALL SELECT 'tipo_habitacion', COUNT(*) FROM tipo_habitacion
