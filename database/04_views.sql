@@ -10,8 +10,9 @@ GO
 --------------------------------------------------------------- */
 WITH ingreso_servicio AS (
 SELECT s.id_servicio,s.nombre,s.categoria,
-SUM(cs.subtotal) AS ingreso FROM operaciones.consumo_servicios
-JOIN servicio s ON s.id_servicio = cs.id_servicio
+SUM(cs.subtotal) AS ingreso
+FROM operacion.consumo_servicio cs
+JOIN catalogo.servicio s ON s.id_servicio = cs.id_servicio
 GROUP BY s.id_servicio, s.nombre, s.categoria),
 
 pct_servicio AS (
@@ -38,7 +39,7 @@ GO
 
 SELECT canal_reserva, [PENDIENTE], [CONFIRMADA], [CANCELADA] FROM (
 SELECT canal_reserva, estado_reserva
-FROM reservacion) src PIVOT (COUNT(estado_reserva)
+FROM reservas.reservacion) src PIVOT (COUNT(estado_reserva)
 FOR estado_reserva IN ([PENDIENTE], [CONFIRMADA], [CANCELADA]) ) pvt
 ORDER BY canal_reserva;
 GO
@@ -52,10 +53,10 @@ COUNT(DISTINCT f.id_factura) AS visitas, SUM(f.total) AS gasto_total,
 RANK()OVER (ORDER BY SUM(f.total) DESC) AS posicion_rank,
 DENSE_RANK() OVER (ORDER BY SUM(f.total) DESC) AS posicion_dense,
 NTILE(4)OVER (ORDER BY SUM(f.total) DESC) AS cuartil_valor
-FROM huesped hu
-JOIN reservacion r ON r.id_huesped = hu.id_huesped
-JOIN estancia e    ON e.id_reservacion = r.id_reservacion
-JOIN factura f     ON f.id_estancia = e.id_estancia
+FROM reservas.huesped hu
+JOIN reservas.reservacion r ON r.id_huesped = hu.id_huesped
+JOIN operacion.estancia e   ON e.id_reservacion = r.id_reservacion
+JOIN facturacion.factura f  ON f.id_estancia = e.id_estancia
 WHERE f.estado_factura <> 'CANCELADO'
 GROUP BY hu.id_huesped, hu.nombre, hu.apellido, hu.nacionalidad
 ORDER BY gasto_total DESC;
